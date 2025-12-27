@@ -8,7 +8,7 @@ public:
     int unions(vector<int>& parents, vector<int>& rank, int a, int b) {
         int rootA = findParent(parents, a);
         int rootB = findParent(parents, b);
-        
+        //you should not update a,b because intermediate node may not be updated if done so. even if updated no issue no effect but redundant and you can update rank everytime but no need only update when they are equla.
         if (rootA == rootB) return -1;
         
         if (rank[rootA] < rank[rootB]) {
