@@ -1,3 +1,4 @@
+//you should not update a,b because intermediate node may not be updated if done so. even if updated no issue no effect but redundant and you can update rank everytime but no need only update when they are equla.
 int findParent(vector<int>& parents, int node) {
         if (parents[node] == node) return node;
   //this line is path compression which happens everytime when we seaech for parent with in a node  
