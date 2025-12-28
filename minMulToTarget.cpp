@@ -34,3 +34,36 @@ class Solution {
         return -1;
     }
 };
+
+
+//second approach with visited instead of ops
+
+// User function Template for C++
+
+class Solution {
+  public:
+    int minimumMultiplications(vector<int>& arr, int start, int end) {
+        sort(arr.begin(),arr.end());
+        queue<pair<int,int>>que;
+        int endL=arr.size();
+        que.push({start,0});
+        vector<int>visited(100000,0);
+        visited[start]=1;
+        if(start==end)return 0;
+        while(!que.empty()){
+            pair<int,int> node=que.front();
+            que.pop();
+            if(node.first==end){
+                return node.second;
+            }
+            for(int i=0;i<endL;i++){
+               
+                   if(visited[node.first*arr[i]%100000]==0){
+                       que.push({node.first*arr[i]%100000,node.second+1});
+                       visited[node.first*arr[i]%100000]=1;
+                   }
+            }
+        }
+        return -1;
+    }
+};
