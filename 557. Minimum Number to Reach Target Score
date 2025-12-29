@@ -1,0 +1,40 @@
+//this is there on the Love babbar Red and Solved it there
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    
+    int findAns(int t,long long s,int A,int M,
+                unordered_map<long long,long long >& dp){
+
+        if(dp.find(s)!=dp.end()) return dp[s];
+
+        if(s > t) return dp[s] = INT_MAX;
+
+        if(s == t) return 0;
+
+        int op1 = INT_MAX, op2 = INT_MAX;
+
+        int c1 = findAns(t, s + A, A, M, dp);
+        if(c1 != INT_MAX) op1 = min(op1, c1 + 1);
+
+        if(s != 0 && s * M <= t && M!=1){
+            int c2 = findAns(t, s * M, A, M, dp);
+            if(c2 != INT_MAX) op2 = min(op2, c2 + 1);
+        }
+
+        return dp[s] = min(op1, op2);
+    }
+    
+    int minOperations(int target_score, int A, int M) {
+
+        unordered_map<long long,long long> dp;   // <-- fixed type
+
+        long long score = 0;               // safer but same meaning
+
+        int ans = findAns(target_score, score, A, M, dp);
+
+        return ans == INT_MAX ? -1 : ans;
+    }
+};
